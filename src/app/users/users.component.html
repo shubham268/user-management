@@ -1,0 +1,51 @@
+<div class="w3-container">
+  <h2>Users List</h2>
+  
+  <input type="text" class="search" placeholder="search users" #searchEl ngModel/>
+  <div class="w3-row">
+    <div class="w3-col w3-container m5 l6 ">
+      <ul class="w3-ul w3-card-4">
+        <li (click)="userSelect(user)" class="w3-bar user-tile" *ngFor="let user of users | userSearch:searchEl.value;let index=index;">
+          <span (click)="postDelete(user.id,index,$event)" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+          <img [src]="user.avatar" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+          <div class="w3-bar-item">
+            <span class="w3-large">{{ user.first_name }} {{ user.last_name }}</span><br>
+            <span>{{ user.email }}</span>
+          </div>
+        </li>
+      </ul>
+      <div class="error" *ngIf="users.length == 0">
+        Users Not found.
+      </div>
+    </div>
+    <div class="w3-col w3-container m7 l6">  
+      <div *ngIf="selectedUser">
+        <h3>Selected User</h3>
+          <ul class="w3-ul w3-card-4">
+              <li  class="w3-bar user-tile selected">
+                <img [src]="selectedUser.avatar" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+                <div class="w3-bar-item">
+                  <form (ngSubmit)="form.valid && updateUser(form.form.value)" #form="ngForm">
+                    <label>First Name:<input type="text" name="first_name" #fName="ngModel" [(ngModel)]="selectedUser.first_name" required/></label><br/>
+                    <div class="error" *ngIf="fName.errors">
+                      First Name is required
+                    </div>
+                    <label>Last Name:<input type="text" name="last_name" #lName="ngModel" [(ngModel)]="selectedUser.last_name" required/></label><br/>
+                    <div class="error" *ngIf="lName.errors">
+                        Last Name is required
+                    </div>
+                    <label>Email:<input type="email" name="email" #email="ngModel" [(ngModel)]="selectedUser.email" email required/></label><br/>
+                    <div class="error" *ngIf="email.errors">
+                        First Name is required
+                    </div>
+                    <button type="submit">UPDATE</button>
+                  </form>
+                 
+                </div>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,12 @@
+.user-tile:hover,.user-tile.selected{
+    background: blueviolet;
+    cursor: pointer;
+}
+
+.user-tile.selected{
+    color:white;
+}
+
+.search{
+    margin-bottom: 1rem;
+}

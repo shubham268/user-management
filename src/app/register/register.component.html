@@ -1,0 +1,20 @@
+<form (ngSubmit)="form.valid && onSubmit(form.form)" #form="ngForm">
+  <div class="imgcontainer">
+    <h1>Registration Page</h1>
+  </div>
+  <div class="container">
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Username" name="email" required email ngModel #email="ngModel">
+    <div class="error" *ngIf="email.touched && email.errors">
+      <span *ngIf="email.errors.required">Email is required.</span>
+      <span *ngIf="email.errors.email">Email is invalid.</span>  
+    </div>
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" required ngModel #password="ngModel">
+    <div class="error" *ngIf="password.touched && password.errors">
+      <span *ngIf="password.errors.required">Password is required.</span>
+    </div>
+    <a routerLink="/login">Login ?</a>
+    <button type="submit">Register</button>
+  </div>
+</form>
